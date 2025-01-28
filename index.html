@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+
+	<link rel="icon" href="https://www.google.com/images/branding/product/ico/googleg_lodp.ico">
+	<link rel="stylesheet" href="styles.css">
+	<script src="app.js" defer></script>
+</head>
+<body>
+	<div id="main">
+
+		<!-- header -->
+		
+		<div id="header">
+			
+		</div>
+
+		<!-- label filtering -->
+
+		<div id="labels">
+			<form id="filter-form">
+				<input type="checkbox" id="label1" value="Label1">
+				<label for="label1">Label 1</label><br>
+				
+				<input type="checkbox" id="label2" value="Label2">
+				<label for="label2">Label 2</label><br>
+
+				<input type="checkbox" id="label3" value="Label3">
+				<label for="label3">Label 3</label><br>
+			</form>
+		</div>
+
+		<!-- note content -->
+
+		<div id="notes">
+			<template id="note-template">
+				<div class="note">
+					<h2 class="note-title"></h2>
+					<div class="note-content"></div>
+					<ul class="note-labels"></ul>
+				</div>
+			</template>
+		</div>
+	</div>
+</body>
+</html>
+
