@@ -66,15 +66,8 @@ body {
 /* note title */
 
 .note-title {
-	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
-}
-
-.note:hover .note-title {
-	white-space: normal;
-	overflow: visible;
-	word-break: break-word;
 }
 
 /* note content */
@@ -84,6 +77,16 @@ body {
 	flex-direction: column;
 	gap: 1rem;
 
+	> * {
+		border-radius: 0.5rem;
+
+		&:hover {
+			scale: 1.05;
+		}
+
+		transition: 100ms;
+	}
+
 	input {
 		cursor: pointer;
 
@@ -91,6 +94,13 @@ body {
 			text-decoration: line-through;
 			color: rgba(0, 0, 0, 0.5);
 		}
+	}
+
+	img {
+		max-width: 100%;
+		object-fit: fit;
+
+		box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
 	}
 }
 

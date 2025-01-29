@@ -1,10 +1,32 @@
 // temporary data
 
+function random(min, max) {
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function randomImage() {
+	const id = random(0, 1024);
+
+	const width = random(500, 1000);
+	const height = random(500, 1000);
+
+	return `https://picsum.photos/id/${id}/${width}/${height}.webp`;
+}
+
+const keyName = "age";
+
+const object = {
+	name: "name name",
+	age: 30,
+}
+
+console.log(object[keyName]);
+
 const exampleNotes = [
 	{
 		created: new Date().toLocaleString(),
-		title: "Project Brainstorming asdasdasdasdasdasdasdasdasdasdasdasdasd",
-		labels: ["Brainstorming", "Project"],
+		title: "This is a test title with a loooooonnnnnnnnnnnnngggggggggggggloooooonnnnnnnnnnnnnggggggggggggg title in it in fact its even longer now and it just keeps going",
+		labels: ["School"],
 		content: [
 			{ type: "text", data: "Initial ideas for the new project." },
 			{ type: "checklist", data: [
@@ -23,40 +45,15 @@ const exampleNotes = [
 				"Set timeline"
 			] },
 			{ type: "text", data: "Next steps will be to refine these ideas." },
-			{ type: "image", data: `https://picsum.photos/id/${Math.floor(Math.random() * 1000)}/500/300` }
+			{ type: "image", data: randomImage() }
 		]
 	},
 	{
 		created: new Date().toLocaleString(),
-		title: "Meeting with the team",
-		labels: ["Team", "Meeting"],
+		title: "This is a test title with a loooooonnnnnnnnnnnnngggggggggggggloooooonnnnnnnnnnnnnggggggggggggg title in it in fact its even longer now and it just keeps going",
+		labels: ["Reminder"],
 		content: [
-			{ type: "text", data: "Meeting notes from the team meeting last week." },
-			{ type: "checklist", data: [
-				{ checked: false, text: "Follow up with the marketing team" },
-				{ checked: false, text: "Create a new branch on GitHub" },
-				{ checked: true, text: "Update the project timeline" }
-			] },
-			{ type: "bullets", data: [
-				"Clarify the project scope",
-				"Set up a new project board on Trello",
-				"Create a new budget for the project"
-			] },
-			{ type: "list", data: [
-				"Create a new branch on GitHub",
-				"Update the project timeline",
-				"Follow up with the marketing team"
-			] },
-			{ type: "text", data: "Next steps will be to follow up with the team." },
-			{ type: "image", data: `https://picsum.photos/id/${Math.floor(Math.random() * 1000)}/500/300` }
-		]
-	},
-	{
-		created: new Date().toLocaleString(),
-		title: "Initial Research",
-		labels: ["Research"],
-		content: [
-			{ type: "text", data: "Initial research notes." },
+			{ type: "text", data: "Initial ideas for the new project." },
 			{ type: "checklist", data: [
 				{ checked: false, text: "Research market trends" },
 				{ checked: false, text: "Identify key stakeholders" },
@@ -73,32 +70,19 @@ const exampleNotes = [
 				"Set timeline"
 			] },
 			{ type: "text", data: "Next steps will be to refine these ideas." },
-			{ type: "image", data: `https://picsum.photos/id/${Math.floor(Math.random() * 1000)}/500/300` }
+			{ type: "image", data: randomImage() }
 		]
 	},
 	{
 		created: new Date().toLocaleString(),
-		title: "Long Text",
-		labels: ["Text"],
+		title: "This is a test title with a loooooonnnnnnnnnnnnngggggggggggggloooooonnnnnnnnnnnnnggggggggggggg title in it in fact its even longer now and it just keeps going",
+		labels: ["Personal"],
 		content: [
-			{
-				type: "text",
-				data:
-					"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris auctor lectus sit amet lectus tincidunt, in vestibulum nunc posuere. Sed eget massa vitae nunc cursus ultrices. Nullam auctor, nulla et ultricies malesuada, tellus nunc dignissim nibh, nec feugiat nisl justo et nunc. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed auctor, nisl et ultricies malesuada, tellus nunc dignissim nibh, nec feugiat nisl justo et nunc. Nullam auctor, nulla et ultricies malesuada, tellus nunc dignissim nibh, nec feugiat nisl justo et nunc." +
-					"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris auctor lectus sit amet lectus tincidunt, in vestibulum nunc posuere. Sed eget massa vitae nunc cursus ultrices. Nullam auctor, nulla et ultricies malesuada, tellus nunc dignissim nibh, nec feugiat nisl justo et nunc. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed auctor, nisl et ultricies malesuada, tellus nunc dignissim nibh, nec feugiat nisl justo et nunc. Nullam auctor, nulla et ultricies malesuada, tellus nunc dignissim nibh, nec feugiat nisl justo et nunc."
-			}
-		]
-	},
-	{
-		created: new Date().toLocaleString(),
-		title: "More Text",
-		labels: ["Text"],
-		content: [
-			{ type: "text", data: "More text." },
+			{ type: "text", data: "Initial ideas for the new project." },
 			{ type: "checklist", data: [
-				{ checked: false, text: "Create a new branch on GitHub" },
-				{ checked: false, text: "Update the project timeline" },
-				{ checked: true, text: "Follow up with the marketing team" }
+				{ checked: false, text: "Research market trends" },
+				{ checked: false, text: "Identify key stakeholders" },
+				{ checked: true, text: "Draft initial project scope" }
 			] },
 			{ type: "bullets", data: [
 				"Consider potential risks",
@@ -110,10 +94,10 @@ const exampleNotes = [
 				"Gather resources",
 				"Set timeline"
 			] },
-			{ type: "text", data: "Next steps will be to follow up with the team." },
-			{ type: "image", data: `https://picsum.photos/id/${Math.floor(Math.random() * 1000)}/500/300` }
+			{ type: "text", data: "Next steps will be to refine these ideas." },
+			{ type: "image", data: randomImage() }
 		]
-	}
+	},
 ];
 
 localStorage.setItem("notes", JSON.stringify(exampleNotes));
@@ -130,21 +114,24 @@ function loadNoteDOM(note) {
 	const noteElement = noteTemplate.content.cloneNode(true);
 
 	const noteTitle = noteElement.querySelector(".note-title");
+	const noteDate = noteElement.querySelector(".note-date");
 	const noteLabels = noteElement.querySelector(".note-labels");
 	const noteContent = noteElement.querySelector(".note-content");
 
-	// add title
+	// set info
 
 	noteTitle.textContent = note.title;
+	noteDate.textContent = note.created;
 
 	// fill labels
 
-	note.labels.forEach(label => {
+	for (label of note.labels) {
 		const li = document.createElement("li");
+		li.dataset.label = label.toLowerCase();
 		li.textContent = label;
 		
 		noteLabels.appendChild(li);
-	});
+	}
 
 	// fill content
 
@@ -210,6 +197,13 @@ function loadNoteDOM(note) {
 				noteContent.appendChild(checklistUl);
 
 				break;
+			case "image":
+				const img = document.createElement("img");
+				img.src = section.data;
+
+				noteContent.appendChild(img);
+
+				break;
 		}
 	}
 
@@ -230,6 +224,23 @@ window.onload = event => {
 
 // filter notes
 
+function filterNotes(selected) {
+	const notes = document.querySelectorAll(".note");
+
+	for (const note of notes) {
+		const labelElements = Array.from(note.querySelector(".note-labels").children);
+		const labelValues = labelElements.map(element => element.dataset.label);
+
+		const matches = labelValues.some(label => selected.includes(label));
+
+		if (matches || selected.length === 0) {
+			note.style.display = "flex";
+		} else {
+			note.style.display = "none";
+		}
+	}
+}
+
 const filterForm = document.getElementById("filter-form");
 
 filterForm.addEventListener("change", () => {
@@ -237,9 +248,9 @@ filterForm.addEventListener("change", () => {
 
 	for (const element of filterForm.elements) {
 		if (element.type === "checkbox" && element.checked) {
-			selectedLabels.push(element.value);
+			selectedLabels.push(element.id.toLowerCase());
 		}
 	}
 
-	// use labels here and filter notes
+	filterNotes(selectedLabels);
 });
