@@ -30,93 +30,14 @@ body {
 
 #header {
 	grid-area: header;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 /* label container */
 
 #labels {
 	grid-area: labels;
-}
-
-/* note container */
-
-#notes {
-	grid-area: notes;
-
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-	grid-template-rows: min-content;
-	gap: 1rem;
-}
-
-/* individual note styles */
-
-.note {
-	box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
-	border-radius: 1rem;
-	padding: 2rem;
-
-	display: flex;
-	flex-direction: column;
-	gap: 2rem;
-
-	height: fit-content;
-}
-
-/* note title */
-
-.note-title {
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-
-/* note content */
-
-.note-content {
-	display: flex;
-	flex-direction: column;
-	gap: 1rem;
-
-	> * {
-		border-radius: 0.5rem;
-
-		&:hover {
-			scale: 1.05;
-		}
-
-		transition: 100ms;
-	}
-
-	input {
-		cursor: pointer;
-
-		&:checked + label {
-			text-decoration: line-through;
-			color: rgba(0, 0, 0, 0.5);
-		}
-	}
-
-	img {
-		max-width: 100%;
-		object-fit: fit;
-
-		box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
-	}
-}
-
-/* note labels */
-
-.note-labels {
-	list-style-type: none;
-	display: flex;
-	gap: 0.5rem;
-}
-
-.note-labels li {
-	background-color: black;
-	color: white;
-	border-radius: 1rem;
-	padding: 0.3rem 0.7rem;
-
-	font-size: 12px;
 }

@@ -6,8 +6,13 @@
 	<title>Document</title>
 
 	<link rel="icon" href="https://www.google.com/images/branding/product/ico/googleg_lodp.ico">
+
 	<link rel="stylesheet" href="styles.css">
-	<script src="app.js" defer></script>
+	<link rel="stylesheet" href="notes.css">
+
+	<script src="src/app.js" defer></script>
+	<script src="src/data.js" defer></script>
+	<script src="src/temporary.js" defer></script>
 </head>
 <body>
 	<div id="main">
@@ -15,7 +20,7 @@
 		<!-- header -->
 		
 		<div id="header">
-			
+			<input id="search" autocomplete="off" placeholder="Search" type="text">
 		</div>
 
 		<!-- label filtering -->
@@ -45,6 +50,10 @@
 				</div>
 			</template>
 		</div>
+
+		<!-- new note button -->
+
+		<button id="new-note">+</button>
 	</div>
 </body>
 </html>

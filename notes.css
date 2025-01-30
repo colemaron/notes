@@ -1,0 +1,125 @@
+/* new note button */
+
+#new-note {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+
+	margin: 2rem;
+	width: 5rem;
+	height: 5rem;
+	font-size: 3.5rem;
+
+	background-color: black;
+	color: white;
+
+	border: none;
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+	border-radius: 50%;
+
+	&:hover {
+		cursor: pointer;
+		
+		background-color: white;
+		color: black;
+	}
+
+	&:active {
+		scale: 0.9;
+
+		transition: 25ms;
+	}
+
+	transition: 100ms;
+}
+
+/* note container */
+
+#notes {
+	grid-area: notes;
+
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	grid-template-rows: min-content;
+	gap: 2rem;
+}
+
+/* main individual note */
+
+.note {
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
+	border-radius: 1rem;
+	padding: 2rem;
+
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+
+	height: fit-content;
+}
+
+/* note title */
+
+.note-title {
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/* note content - all sections */
+
+.note-content {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+
+	> * {
+		border-radius: 0.5rem;
+	}
+
+	input {
+		cursor: pointer;
+
+		&:checked + label {
+			text-decoration: line-through;
+			color: rgba(0, 0, 0, 0.5);
+		}
+	}
+
+	ol, ul {
+		list-style-position: inside;
+	}
+
+	> img {
+		max-width: 100%;
+		object-fit: fit;
+	}
+}
+
+/* note checklist */
+
+.note-checklist {
+	list-style-type: none;
+
+	li {
+		display: flex;
+		gap: 0.5rem;
+	}
+}
+
+/* note labels */
+
+.note-labels {
+	list-style-type: none;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}
+
+.note-labels li {
+	background-color: black;
+	color: white;
+	border-radius: 1rem;
+	padding: 0.3rem 0.7rem;
+
+	font-size: 12px;
+}
