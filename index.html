@@ -7,11 +7,13 @@
 
 	<link rel="icon" href="https://www.google.com/images/branding/product/ico/googleg_lodp.ico">
 
-	<link rel="stylesheet" href="styles.css">
-	<link rel="stylesheet" href="notes.css">
+	<link rel="stylesheet" href="../styles/styles.css">
+	<link rel="stylesheet" href="../styles/notes.css">
+	<link rel="stylesheet" href="../styles/folders.css">
+	<link rel="stylesheet" href="../styles/header.css">
 
-	<script src="src/app.js" defer></script>
 	<script src="src/data.js" defer></script>
+	<script src="src/search.js" defer></script>
 	<script src="src/temporary.js" defer></script>
 </head>
 <body>
@@ -25,17 +27,11 @@
 
 		<!-- label filtering -->
 
-		<div id="labels">
-			<form id="filter-form">
-				<input type="checkbox" id="School" value="School">
-				<label for="School">School</label><br>
-
-				<input type="checkbox" id="Reminder" value="Reminder">
-				<label for="Reminder">Reminder</label><br>
-
-				<input type="checkbox" id="Personal" value="Personal">
-				<label for="Personal">Personal</label><br>
-			</form>
+		<div id="folders">
+			<div class="folder">
+				<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M200-200h360v-200h200v-360H200v560Zm0 80q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v400L600-120H200Zm80-280v-80h200v80H280Zm0-160v-80h400v80H280Zm-80 360v-560 560Z"/></svg>
+				<p>Notes</p>
+			</div>
 		</div>
 
 		<!-- note content -->

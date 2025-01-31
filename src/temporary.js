@@ -36,14 +36,14 @@ const exampleNotes = [
 	// 		{ type: "image", data: randomImage() }
 	// 	]
 	// },
-	// {
-	// 	created: new Date().toLocaleString(),
-	// 	title: "Meeting Notes",
-	// 	labels: ["School"],
-	// 	content: [
-	// 		{ type: "text", data: "Meeting with John to discuss project proposal and refine the scope and details." },
-	// 	]
-	// },
+	{
+		created: new Date().toLocaleString(),
+		title: "Meeting Notes",
+		labels: ["School", "Reminder"],
+		content: [
+			{ type: "text", data: "Meeting with John to discuss project proposal and refine the scope and details." },
+		]
+	},
 	{
 		created: new Date().toLocaleString(),
 		title: "Random Note 1",
@@ -181,4 +181,10 @@ const exampleNotes = [
 	},
 ];
 
-localStorage.setItem("notes", JSON.stringify(exampleNotes));
+const n = 500;
+
+const repeatedArr = Array(n + 1).fill(0).map(() => exampleNotes).flat();
+
+console.log(repeatedArr.length);
+
+localStorage.setItem("notes", JSON.stringify(repeatedArr));

@@ -1,0 +1,31 @@
+#header {
+	grid-area: header;
+	
+	position: sticky;
+	top: 0;
+	padding: 1rem;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	backdrop-filter: blur(6px);
+	box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
+}
+
+#search {
+	height: 100%;
+	width: 50vw;
+	min-width: 400px;
+	padding: 1rem 1.5rem;
+	
+	border: none;
+	outline: none;
+	border-radius: 100vw;
+
+	box-shadow: 0 0 16px rgba(0, 0, 0, 0.25);
+
+	&:focus {
+		box-shadow: 0 0 0 2px black;
+	}
+}
