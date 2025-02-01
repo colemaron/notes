@@ -12,9 +12,9 @@
 	<link rel="stylesheet" href="../styles/folders.css">
 	<link rel="stylesheet" href="../styles/header.css">
 
-	<script src="src/data.js" defer></script>
-	<script src="src/search.js" defer></script>
 	<script src="src/temporary.js" defer></script>
+	<script src="src/search.js" defer></script>
+	<script src="src/data.js" defer></script>
 </head>
 <body>
 	<div id="main">
@@ -22,16 +22,48 @@
 		<!-- header -->
 		
 		<div id="header">
-			<input id="search" autocomplete="off" placeholder="Search" type="text">
+			<form id="search-form">
+				<input id="search" name="query" autocomplete="off" placeholder="Search for notes" type="text">
+				
+				<button id="search-reset" type="reset">
+					<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
+				</button>
+			</form>
+
+			<form id="sort-form">
+				<select name="sort" id="sort">
+					<option value="newest">Newest</option>
+					<option value="oldest">Oldest</option>
+					<option value="alphabetical">Alphabetical</option>
+				</select>
+				
+				<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M120-240v-80h240v80H120Zm0-200v-80h480v80H120Zm0-200v-80h720v80H120Z"/></svg>
+			</form>
 		</div>
 
 		<!-- label filtering -->
 
 		<div id="folders">
-			<div class="folder">
+			<button class="folder selected">
 				<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M200-200h360v-200h200v-360H200v560Zm0 80q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v400L600-120H200Zm80-280v-80h200v80H280Zm0-160v-80h400v80H280Zm-80 360v-560 560Z"/></svg>
 				<p>Notes</p>
-			</div>
+			</button>
+			<button class="folder">
+				<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M200-200h360v-200h200v-360H200v560Zm0 80q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v400L600-120H200Zm80-280v-80h200v80H280Zm0-160v-80h400v80H280Zm-80 360v-560 560Z"/></svg>
+				<p>Notes</p>
+			</button>
+			<button class="folder">
+				<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M200-200h360v-200h200v-360H200v560Zm0 80q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v400L600-120H200Zm80-280v-80h200v80H280Zm0-160v-80h400v80H280Zm-80 360v-560 560Z"/></svg>
+				<p>Notes</p>
+			</button>
+			<button class="folder">
+				<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M200-200h360v-200h200v-360H200v560Zm0 80q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v400L600-120H200Zm80-280v-80h200v80H280Zm0-160v-80h400v80H280Zm-80 360v-560 560Z"/></svg>
+				<p>Notes</p>
+			</button>
+			<button class="folder">
+				<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M200-200h360v-200h200v-360H200v560Zm0 80q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v400L600-120H200Zm80-280v-80h200v80H280Zm0-160v-80h400v80H280Zm-80 360v-560 560Z"/></svg>
+				<p>Notes</p>
+			</button>
 		</div>
 
 		<!-- note content -->

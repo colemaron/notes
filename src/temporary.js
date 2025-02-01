@@ -181,10 +181,4 @@ const exampleNotes = [
 	},
 ];
 
-const n = 500;
-
-const repeatedArr = Array(n + 1).fill(0).map(() => exampleNotes).flat();
-
-console.log(repeatedArr.length);
-
-localStorage.setItem("notes", JSON.stringify(repeatedArr));
+// localStorage.setItem("notes", JSON.stringify(exampleNotes));
