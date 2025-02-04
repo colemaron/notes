@@ -1,17 +1,3 @@
-const noteContainer = document.getElementById("notes");
-
-// get and update notes
-
-let noteElements = Array.from(noteContainer.querySelectorAll(".note"));
-
-const observer = new MutationObserver(mutations => {
-	noteElements = Array.from(noteContainer.querySelectorAll(".note"));
-
-	console.log("updated");
-});
-
-observer.observe(noteContainer, { childList: true });
-
 // show - hide functions
 
 function show(element) { element.classList.remove("hidden"); };
@@ -22,8 +8,10 @@ function hide(element) { element.classList.add("hidden"); };
 const searchForm = document.getElementById("search-form");
 const searchInfo = document.getElementById("search-info");
 
-function searchNotes(query = "") {
+function searchNotes(query) {
 	let results = 0;
+
+	// show results
 
 	for (note of noteElements) {
 		const text = note.textContent.toLowerCase();
@@ -37,6 +25,8 @@ function searchNotes(query = "") {
 		}
 	}
 
+	// update result info
+
 	if (query === "") {
 		hide(searchInfo);
 	} else {
@@ -45,7 +35,7 @@ function searchNotes(query = "") {
 		const amount = results === 0 ? "No" : results
 		const s = results === 1 ? "" : "s";
 
-		searchInfo.textContent = `${amount} result${s} found for "${query}".`;
+		searchInfo.innerHTML = `${amount} result${s} found for <span id="search-query">${query}</span>`;
 	}
 }
 
@@ -60,26 +50,21 @@ searchForm.addEventListener("submit", event => {
 	searchNotes(query);
 })
 
-searchForm.addEventListener("reset", searchNotes)
-
 // sort notes
+
+const noteContainer = document.getElementById("notes");
+const noteElements = document.querySelectorAll(".note");
 
 const sortForm = document.getElementById("sort-form");
 
 const sortFunctions = {
-	newest: (a, b) => {
-		return new Date(b.dataset.created) - new Date(a.dataset.created);
-	},
-	oldest: (a, b) => {
-		return new Date(a.dataset.created) - new Date(b.dataset.created);
-	},
-	alphabetical: (a, b) => {
-		return a.dataset.title.localeCompare(b.dataset.title);
-	}
+	"newest": (a, b) => new Date(b.dataset.created) - new Date(a.dataset.created),
+	"oldest": (a, b) => new Date(a.dataset.created) - new Date(b.dataset.created),
+	"a-z":    (a, b) => a.dataset.title.localeCompare(b.dataset.title)
 }
 
-function sortNotes(sort = "newest") {
-	noteElements
+function sortNotes(sort) {
+	Array.from(noteElements)
 		.sort(sortFunctions[sort])
 		.forEach(note => noteContainer.appendChild(note));
 }

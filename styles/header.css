@@ -26,7 +26,13 @@
 	&:focus-within {
 		box-shadow: 0 0 0 2px black;
 
-		#search-reset {
+		#search-submit {
+			display: block;
+		}
+	}
+
+	&:hover {
+		#search-submit {
 			display: block;
 		}
 	}
@@ -44,7 +50,7 @@
 	border-radius: inherit inherit 0 0;
 }
 
-#search-reset {
+#search-submit {
 	border: none;
 	border-radius: 50%;
 
@@ -61,6 +67,7 @@
 
 	&:hover {
 		background-color: black;
+		rotate: 90deg;
 		scale: 1.25;
 
 		svg {
@@ -70,13 +77,21 @@
 
 	&:active {
 		scale: 1;
+		rotate: 0deg;
 		box-shadow: 0 0 0 2px black;
 
-		transition: 50ms;
+		transition: 50ms, rotate 75ms ease-out;
 	}
 
 	display: none;
-	transition: 100ms;
+
+	transition: 100ms, rotate 250ms;
+}
+
+#search-query {
+	color: rgb(50, 100, 255);
+	font-style: italic;
+	font-weight: 600;
 }
 
 /* note sorting */

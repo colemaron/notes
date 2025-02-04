@@ -5,7 +5,7 @@
 	bottom: 0;
 	right: 0;
 
-	margin: 1rem;
+	margin: 3rem;
 	width: 5rem;
 	height: 5rem;
 	font-size: 3.5rem;
@@ -87,7 +87,7 @@
 		border-radius: 0.5rem;
 	}
 
-	ol, ul {
+	> ol, ul {
 		list-style-position: inside;
 	}
 
@@ -102,19 +102,54 @@
 .note-checklist {
 	list-style-type: none;
 
-	> input {
+	> li {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+}
+
+.note-checklist .checkbox {
+	appearance: none;
+	cursor: pointer;
+
+	border: 2px solid black;
+	border-radius: 4px;
+
+	width: 1rem;
+	height: 1rem;
+
+	+ label {
 		cursor: pointer;
 
-		&:checked + label {
+		box-shadow: 0 2px transparent;
+		flex-grow: 1;
+
+		transition: 150ms;
+	}
+
+	&:checked {
+		background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 -960 960 960' width='24px' fill='%23FFFFFF'><path d='M382-200 113-469l97-97 172 173 369-369 97 96-466 466Z'/></svg>");
+		background-position: center;
+		background-color: black;
+		background-size: contain;
+
+		rotate: 360deg;
+
+		+ label {
 			text-decoration: line-through;
-			color: rgba(0, 0, 0, 0.5);
+			text-decoration-thickness: 2px;
+			
+			text-decoration-color: hsl(0, 0%, 50%);
+			color: hsl(0, 0%, 50%);
 		}
 	}
 
-	> li {
-		display: flex;
-		gap: 0.5rem;
+	&:hover + label {
+		box-shadow: 0 2px black;
 	}
+
+	transition: 250ms;
 }
 
 /* note labels */
@@ -129,8 +164,8 @@
 .note-labels li {
 	background-color: black;
 	color: white;
-	border-radius: 1rem;
-	padding: 0.3rem 0.7rem;
+	border-radius: 100vw;
+	padding: 5px 12px;
 
 	font-size: 12px;
 }

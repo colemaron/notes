@@ -1,20 +1,27 @@
-const noteTemplate = document.getElementById("note-template");
-const noteContainer = document.getElementById("notes");
-
 class Note {
 	static allNotes = [];
 
-	constructor(title, labels, content, created) {
-		this.created = created || new Date().toISOString();
-		this.title = title || "Untitled";
+	static template = document.getElementById("note-template");
+	static container = document.getElementById("notes");
 
-		this.labels = labels || [];
+	constructor(title, created, labels, content) {
+		this.title = title || "Untitled";
+		this.created = created || new Date().toLocaleString();
+
 		this.content = content || [];
+		this.labels = labels || [];
 	}
 
 	addDOM() {
-		const noteElement = noteTemplate.content.firstElementChild.cloneNode(true);
+		Note.allNotes.push(this);
+		
+		const noteElement = Note.template.content.firstElementChild.cloneNode(true);
 		const [noteTitle, noteContent, noteLabels, noteCreated] = noteElement.children;
+
+		// add data
+
+		noteElement.dataset.title = this.title;
+		noteElement.dataset.created = this.created;
 
 		// add single info
 
@@ -63,14 +70,19 @@ class Note {
 					checklist.classList.add("note-checklist");
 
 					for (const item of section.data) {
+						const id = `${item.text}-${Math.random()}`;
+
 						const li = document.createElement("li");
 
 						const checkbox = document.createElement("input");
-						checkbox.type = "checkbox";
+						checkbox.classList.add("checkbox");
 						checkbox.checked = item.checked;
+						checkbox.type = "checkbox";
+						checkbox.id = id;
 
 						const label = document.createElement("label");
 						label.textContent = item.text;
+						label.htmlFor = id;
 
 						li.appendChild(checkbox);
 						li.appendChild(label);
@@ -101,7 +113,7 @@ class Note {
 
 		// append note
 
-		noteContainer.appendChild(noteElement);
+		Note.container.appendChild(noteElement);
 	}
 }
 
