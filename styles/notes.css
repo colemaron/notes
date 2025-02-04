@@ -87,15 +87,6 @@
 		border-radius: 0.5rem;
 	}
 
-	input {
-		cursor: pointer;
-
-		&:checked + label {
-			text-decoration: line-through;
-			color: rgba(0, 0, 0, 0.5);
-		}
-	}
-
 	ol, ul {
 		list-style-position: inside;
 	}
@@ -111,7 +102,16 @@
 .note-checklist {
 	list-style-type: none;
 
-	li {
+	> input {
+		cursor: pointer;
+
+		&:checked + label {
+			text-decoration: line-through;
+			color: rgba(0, 0, 0, 0.5);
+		}
+	}
+
+	> li {
 		display: flex;
 		gap: 0.5rem;
 	}
@@ -133,4 +133,10 @@
 	padding: 0.3rem 0.7rem;
 
 	font-size: 12px;
+}
+
+/* search info */
+
+#search-info {
+	grid-column: 1 / -1;
 }

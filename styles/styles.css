@@ -28,3 +28,9 @@ svg {
 	grid-template-rows: 5rem 1fr;
 	height: 100vh;
 }
+
+/* js styles */
+
+.hidden {
+	display: none !important;
+}

@@ -12,9 +12,10 @@
 	<link rel="stylesheet" href="../styles/folders.css">
 	<link rel="stylesheet" href="../styles/header.css">
 
-	<script src="src/temporary.js" defer></script>
+	<script src="src/temporary.js" type="module" defer></script>
+	
+	<script src="src/data.js" type="module" defer></script>
 	<script src="src/search.js" defer></script>
-	<script src="src/data.js" defer></script>
 </head>
 <body>
 	<div id="main">
@@ -69,12 +70,14 @@
 		<!-- note content -->
 
 		<div id="notes">
+			<p id="search-info" class="hidden">No results found.</p>
+
 			<template id="note-template">
-				<div class="note">
+				<div class="note" data-index="999">
 					<h2 class="note-title"></h2>
 					<div class="note-content"></div>
 					<ul class="note-labels"></ul>
-					<p class="note-date"></p>
+					<p class="note-created"></p>
 				</div>
 			</template>
 		</div>

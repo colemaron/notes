@@ -1,61 +1,91 @@
+const noteContainer = document.getElementById("notes");
+
 // get and update notes
 
-let noteElements = Array.from(document.querySelectorAll(".note"));
+let noteElements = Array.from(noteContainer.querySelectorAll(".note"));
 
-const observer = new MutationObserver(() => {
-	noteElements = Array.from(document.querySelectorAll(".note"));
+const observer = new MutationObserver(mutations => {
+	noteElements = Array.from(noteContainer.querySelectorAll(".note"));
+
+	console.log("updated");
 });
 
-observer.observe(document.getElementById("notes"), { childList: true });
+observer.observe(noteContainer, { childList: true });
+
+// show - hide functions
+
+function show(element) { element.classList.remove("hidden"); };
+function hide(element) { element.classList.add("hidden"); };
 
 // search for note via contents
 
 const searchForm = document.getElementById("search-form");
+const searchInfo = document.getElementById("search-info");
+
+function searchNotes(query = "") {
+	let results = 0;
+
+	for (note of noteElements) {
+		const text = note.textContent.toLowerCase();
+
+		if (text.includes(query)) {
+			show(note);
+
+			results++;
+		} else {
+			hide(note);
+		}
+	}
+
+	if (query === "") {
+		hide(searchInfo);
+	} else {
+		show(searchInfo);
+
+		const amount = results === 0 ? "No" : results
+		const s = results === 1 ? "" : "s";
+
+		searchInfo.textContent = `${amount} result${s} found for "${query}".`;
+	}
+}
+
+// submit search query
 
 searchForm.addEventListener("submit", event => {
 	event.preventDefault();
 
 	const data = new FormData(searchForm);
-	const regex = new RegExp(data.get("query").split("").join(".{0,1}"), "i");
+	const query = data.get("query").toLowerCase();
 
-	let results = 0;
-
-	for (note of noteElements) {
-		note.style.display = regex.test(note.textContent) ? "flex" : "none";
-
-		results++;
-	}
-
-	if (results === 0) {
-		alert("No results found");
-	}
+	searchNotes(query);
 })
 
-searchForm.addEventListener("reset", event => {
-	for (note of noteElements) {
-		note.style.display = "flex";
+searchForm.addEventListener("reset", searchNotes)
+
+// sort notes
+
+const sortForm = document.getElementById("sort-form");
+
+const sortFunctions = {
+	newest: (a, b) => {
+		return new Date(b.dataset.created) - new Date(a.dataset.created);
+	},
+	oldest: (a, b) => {
+		return new Date(a.dataset.created) - new Date(b.dataset.created);
+	},
+	alphabetical: (a, b) => {
+		return a.dataset.title.localeCompare(b.dataset.title);
 	}
+}
+
+function sortNotes(sort = "newest") {
+	noteElements
+		.sort(sortFunctions[sort])
+		.forEach(note => noteContainer.appendChild(note));
+}
+
+sortForm.addEventListener("change", () => {
+	const data = new FormData(sortForm);
+
+	sortNotes(data.get("sort"));
 })
-
-
-// const search = document.getElementById("search");
-
-// function fuzzySearch(query) {
-// 	const notes = Array.from(document.querySelectorAll(".note"));
-
-// 	for (const note of notes) {
-// 		const regex = new RegExp(query.replace(/[a-zA-Z]/g, c => `${c}[\\s\\S]?`), "i");
-		
-// 		note.style.display = regex.test(note.textContent) ? "flex" : "none";
-// 	}
-// }
-
-// search.addEventListener("input", event => {
-// 	event.preventDefault();
-	
-// 	const start = performance.now();
-// 	fuzzySearch(search.value);
-// 	const end = performance.now();
-	
-// 	console.log(`fuzzySearch took ${end - start}ms`);
-// });
