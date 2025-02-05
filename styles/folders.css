@@ -42,3 +42,7 @@
 		fill: white;
 	}
 }
+
+#new-folder {
+	background-color: transparent;
+}

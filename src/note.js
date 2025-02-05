@@ -1,32 +1,59 @@
+function generateUniqueKey() {
+	const array = new Uint32Array(1);
+	crypto.getRandomValues(array);
+
+	return array[0].toString(36);
+}
+
 class Note {
-	static allNotes = [];
+	static noteElements = {};
 
 	static template = document.getElementById("note-template");
 	static container = document.getElementById("notes");
 
+	// save all notes
+
+	static saveNotes() {
+		localStorage.setItem("notes", JSON.stringify(Note.noteElements));
+	}
+
+	// construct new note
+
 	constructor(title, created, labels, content) {
 		this.title = title || "Untitled";
 		this.created = created || new Date().toLocaleString();
-
 		this.content = content || [];
 		this.labels = labels || [];
+
+		this.key = generateUniqueKey();
+		this.element = null;
+		
+		this.insert();
 	}
 
-	addDOM() {
-		Note.allNotes.push(this);
-		
+	// save note to element object
+
+	save() {
+		const key = `${this.title} - ${this.created} - ${this.key}`;
+
+		this.element.dataset.key = key;
+		Note.noteElements[key] = this;
+	}
+
+	// insert dom note element
+
+	insert() {
 		const noteElement = Note.template.content.firstElementChild.cloneNode(true);
-		const [noteTitle, noteContent, noteLabels, noteCreated] = noteElement.children;
 
-		// add data
-
-		noteElement.dataset.title = this.title;
-		noteElement.dataset.created = this.created;
+		const [noteTitle, noteContent, noteLabels, noteInfo] = noteElement.children;
+		const [noteCreated, noteEdit, noteDelete] = noteInfo.children;
+		
+		this.element = noteElement;
 
 		// add single info
 
-		noteTitle.textContent = this.title;
-		noteCreated.textContent = this.created;
+		noteTitle.textContent = noteElement.dataset.title = this.title;
+		noteCreated.textContent = noteElement.dataset.createElement = this.created;
 
 		// add content
 
@@ -67,22 +94,18 @@ class Note {
 					break;
 				case "checklist":
 					const checklist = document.createElement("ul");
-					checklist.classList.add("note-checklist");
+					checklist.classList.add("note-checklist");	
 
 					for (const item of section.data) {
-						const id = `${item.text}-${Math.random()}`;
-
 						const li = document.createElement("li");
 
 						const checkbox = document.createElement("input");
 						checkbox.classList.add("checkbox");
 						checkbox.checked = item.checked;
 						checkbox.type = "checkbox";
-						checkbox.id = id;
 
 						const label = document.createElement("label");
 						label.textContent = item.text;
-						label.htmlFor = id;
 
 						li.appendChild(checkbox);
 						li.appendChild(label);
@@ -110,6 +133,10 @@ class Note {
 
 			noteLabels.appendChild(labelElement);
 		}
+
+		// link object to element
+
+		this.save();
 
 		// append note
 

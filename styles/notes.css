@@ -1,17 +1,38 @@
 /* new note button */
 
 #new-note {
+	cursor: pointer;
+
 	background-color: black;
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
+	border-radius: 50%;
+	border: none;
 
 	position: fixed;
-	bottom: 5vmin;
-	right: 5vmin;
-
+	bottom: 7vmin;
+	right: 7vmin;
+	
 	width: 5rem;
 	height: 5rem;
 
-	border-radius: 50%;
-	border: none;
+	&:hover {
+		background-color: white;
+		border-radius: 1rem;
+		scale: 1.1;
+
+		> svg {
+			fill: black;
+		}
+	}
+
+	&:active {
+		box-shadow: 0 0 0 2px black;
+		scale: 1;
+
+		transition: 75ms ease-out;
+	}
+
+	transition: 100ms ease-out;
 }
 
 /* note container */
@@ -31,7 +52,7 @@
 /* main individual note */
 
 .note {
-	box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 0 16px rgba(0, 0, 0, 0.15);
 	border-radius: 1rem;
 	padding: 2rem;
 
@@ -43,9 +64,13 @@
 
 	&:hover {
 		box-shadow: 0 0 0 2px black;
+
+		.note-info {
+			display: flex;
+		}
 	}
 
-	transition: 100ms;
+	transition: 150ms;
 }
 
 /* note title */
@@ -73,7 +98,60 @@
 	> img {
 		max-width: 100%;
 		object-fit: fit;
+
+		&:focus {
+			scale: 1.1;
+		}
+
+		transition: 100ms ease-out;
 	}
+}
+
+/* note info */
+
+.note-info {
+	display: none;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.note-created {
+	flex-grow: 1;
+}
+
+/* note buttons */
+
+.note-button {
+	padding: 12px;
+	border-radius: 8px;
+	border: none;
+
+	background-color: transparent;
+
+	> svg {
+		transition: 100ms, rotate 300ms cubic-bezier(0.25, 1.5, 0.5, 1);
+	}
+
+	&:hover {
+		background-color: black;
+
+		> svg {
+			rotate: 10deg;
+			fill: white;
+		}
+	}
+
+	&:active {
+		scale: 0.9;
+		
+		> svg {
+			rotate: 360deg;
+		}
+
+		transition: 50ms;
+	}
+
+	transition: 100ms;
 }
 
 /* note checklist */
@@ -98,14 +176,7 @@
 	width: 1rem;
 	height: 1rem;
 
-	+ label {
-		cursor: pointer;
-
-		box-shadow: 0 2px transparent;
-		flex-grow: 1;
-
-		transition: 150ms;
-	}
+	flex-shrink: 0;
 
 	&:checked {
 		background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 -960 960 960' width='24px' fill='%23FFFFFF'><path d='M382-200 113-469l97-97 172 173 369-369 97 96-466 466Z'/></svg>");
@@ -117,15 +188,8 @@
 
 		+ label {
 			text-decoration: line-through;
-			text-decoration-thickness: 2px;
-			
-			text-decoration-color: hsl(0, 0%, 50%);
 			color: hsl(0, 0%, 50%);
 		}
-	}
-
-	&:hover + label {
-		box-shadow: 0 2px black;
 	}
 
 	transition: 250ms;
@@ -144,7 +208,7 @@
 	background-color: black;
 	color: white;
 	border-radius: 100vw;
-	padding: 5px 12px;
+	padding: 5px 14px;
 
 	font-size: 12px;
 }
