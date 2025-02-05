@@ -13,13 +13,9 @@
 	padding: 0.75rem 1rem;
 	cursor: pointer;
 
-	background-color: transparent;
+	background: none;
 	border-radius: 0.5rem;
 	border: none;
-
-	svg {
-		fill: black;
-	}
 
 	&:hover {
 		box-shadow: 0 0 0 2px black;
@@ -44,5 +40,5 @@
 }
 
 #new-folder {
-	background-color: transparent;
+	background: none;
 }

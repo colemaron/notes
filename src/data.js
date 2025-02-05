@@ -2,36 +2,12 @@ import { Note } from "./note.js";
 
 // load notes
 
-const jsonData = JSON.parse(localStorage.getItem("notes")) || []
-
-console.log(jsonData);
+const json = JSON.parse(localStorage.getItem("notes")) || {};
 
 // save notes
 
-window.addEventListener("beforeunload", Note.saveNotes);
+function saveNotes() {
+	const json = JSON.stringify(Object.values(notes));
 
-// add new note
-
-const newNote = document.getElementById("new-note");
-
-newNote.addEventListener("click", event => {
-	const note = new Note();
-});
-
-// note interaction
-
-document.addEventListener("click", event => {
-	const target = event.target.closest("button");
-
-	if (!target) { return; }
-
-	const note = target.closest(".note");
-
-	// delete note
-
-	if (target.classList.contains("note-delete")) {
-		delete Note.noteElements[note.dataset.key];
-
-		note.remove();
-	}
-})
+	localStorage.setItem("notes", json);
+}
