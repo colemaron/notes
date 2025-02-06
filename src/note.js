@@ -1,52 +1,61 @@
 const noteContainer = document.getElementById("notes");
 
+// get current formatted date
+
 function date() {
 	return new Date().toLocaleString(undefined, { dateStyle: "short", timeStyle: "short" });
 }
 
+// add element with name to parent
+
+function add(parent, tag, options) {
+	const element = document.createElement(tag);
+
+	options.text ? element.textContent = options.text : null;
+	options.class ? element.classList.add(options.class) : null;
+
+	return parent.appendChild(element);
+}
+
+// note class
+
 class Note {
-	// construct new note
+	constructor(title, created, content, labels, folder) {
+		this.title = title || "Untitled Note";
+		this.created = created || date();
+		this.content = content || [];
+		this.labels = labels || [];
 
-	constructor() {
-		this.title = "Untitled Note";
-		this.created = date();
-		this.content = [];
-		this.labels = new Set();
-
+		this.folder = folder || "Notes";
 		this.uuid = crypto.randomUUID();
-		this.folder = "Notes";
 	}
 
 	// insert dom note element
 
 	insert() {
-		// create content
+		const note = add(noteContainer, "div", { class: "note", });
 
-		
+		add(note, "h2", { class: "title", text: this.title });
 
-		// create labels
+		// content
 
-		const labels = Array.from(this.labels).map(label => `<li>${label}</li>`).join("");
 
-		// create final note
 
-		const note = `
-			<div class="note">
-				<h2 class="title">${this.title}</h2>
-				<div class="content">${this.content}</div>
-				<ul class="labels">${labels}</ul>
-				
-				<div class="info">
-					<p class="created">${this.created}</p>
-					<button class="delete"></button>
-					<button class="edit"></button>
-				</div>
-			</div>
-		`
+		// labels
 
-		// add note to DOM
+		const labels = add(note, "div", { class: "labels" });
 
-		noteContainer.innerHTML += note;
+		for (const label of this.labels) {
+			add(labels, "li", { class: "label", text: label });
+		}
+
+		// info section
+
+		const info = add(note, "div", { class: "info", });
+
+		add(info, "p", { class: "created", text: this.created });
+		add(info, "button", { class: "delete" });
+		add(info, "button", { class: "edit" });
 	}
 }
 

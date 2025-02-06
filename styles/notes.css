@@ -6,6 +6,8 @@
 	position: fixed;
 	bottom: 5vmin;
 	right: 5vmin;
+
+	padding: 12px;
 	width: 5rem;
 	height: 5rem;
 
@@ -13,15 +15,12 @@
 	border-radius: 50%;
 	border: none;
 
-	background-image: url("../icons/white/add.png");
-	background-position: center;
-	background-repeat: no-repeat;
 	background-color: black;
-	background-size: 75%;
+	svg { fill: white; }
 
 	&:hover {
 		background-color: white;
-		background-image: url("../icons/black/add.png");
+		svg { fill: black; }
 
 		border-radius: 1rem;
 	}
@@ -30,7 +29,7 @@
 		box-shadow: 0 0 0 2px black;
 		scale: 0.95;
 
-		transition: 50ms;
+		transition: 50ms ease-out;
 	}
 
 	transition: 150ms;
@@ -65,6 +64,10 @@
 
 	&:hover {
 		box-shadow: 0 0 0 2px black;
+
+		.info {
+			display: flex;
+		}
 	}
 
 	transition: 100ms;
@@ -72,34 +75,48 @@
 
 /* note info */
 
-.note.info {
+.note .info {
 	display: none;
 	align-items: center;
 	gap: 0.5rem;
 
 	> button {
 		cursor: pointer;
-	}
 
-	> .edit {
-		background-image: url("../icons/white/edit.png");
+		border-radius: 0.5rem;
+		border: none;
+		width: 40px;
+		height: 40px;
+
+		background-color: transparent;
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: 24px;
+
+		&:hover {
+			background-color: black;
+
+			svg { fill: white; }
+		}
+
+		transition: 100ms;
 	}
 }
 
-.note.created {
+.info .created {
 	flex-grow: 1;
 }
 
 /* note title */
 
-.note.title {
+.note .title {
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
 
 /* note content - all sections */
 
-.note.content {
+.note .content {
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
@@ -120,7 +137,7 @@
 
 /* note checklist */
 
-.note.checklist {
+.note .checklist {
 	list-style-type: none;
 
 	> li {
@@ -130,7 +147,7 @@
 	}
 }
 
-.note.checklist .checkbox {
+.note .checklist .checkbox {
 	appearance: none;
 	cursor: pointer;
 
@@ -175,14 +192,14 @@
 
 /* note labels */
 
-.note.labels {
+.note .labels {
 	list-style-type: none;
 	display: flex;
 	flex-wrap: wrap;
 	gap: 0.5rem;
 }
 
-.note.labels li {
+.note .labels li {
 	background-color: black;
 	color: white;
 	border-radius: 100vw;
