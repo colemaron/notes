@@ -48,6 +48,8 @@ searchForm.addEventListener("submit", event => {
 	const query = data.get("query").toLowerCase();
 
 	searchNotes(query);
+
+	console.log("searched notes");
 })
 
 // sort notes
@@ -67,6 +69,8 @@ function sortNotes(sort) {
 	Array.from(noteElements)
 		.sort(sortFunctions[sort])
 		.forEach(note => noteContainer.appendChild(note));
+
+	console.log("sorted notes");
 }
 
 sortForm.addEventListener("change", () => {

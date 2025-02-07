@@ -33,14 +33,51 @@ window.addEventListener("beforeunload", saveNotes);
 
 // add empty note
 
-function addNote() {
+const newNote = document.getElementById("new-note")
+
+function addNewNote() {
 	const note = new Note();
+	note.insert();
 
 	notes.set(note.uuid, note);
 }
+
+newNote.addEventListener("click", addNewNote);
 
 // load note elements
 
 for (const [uuid, note] of notes) {
 	note.insert();
 }
+
+// note event listeners
+
+function copyText(element) {
+	const text = element.textContent;
+
+	if (text !== "Copied!") {
+		navigator.clipboard.writeText(text);
+		element.textContent = "Copied!";
+
+		setTimeout(() => element.textContent = text, 1000);
+	} 
+}
+
+document.addEventListener("click", event => {
+	const target = event.target;
+
+	switch (target.classList[0]) {
+		case "uuid": {
+			copyText(target);
+
+			break;
+		} case "delete": {
+			const note = target.closest(".note");
+			
+			notes.delete(note.dataset.uuid);
+			note.parentNode.remove();
+
+			break;
+		}
+	}
+})
