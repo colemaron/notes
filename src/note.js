@@ -2,17 +2,12 @@ const noteContainer = document.getElementById("notes");
 
 // get current formatted date
 
-function date() {
-	return new Date().toLocaleString(undefined, { dateStyle: "short", timeStyle: "short" });
-}
+const formatDate = date => new Date(date).toLocaleString(undefined, { dateStyle: "short", timeStyle: "short" });
 
 // add element with name to parent
 
 function add(parent, tag, options) {
 	const element = document.createElement(tag);
-
-	// options.text ? element.textContent = options.text : null;
-	// options.class ? element.classList.add(options.class) : null;
 
 	for (const [key, value] of Object.entries(options)) {
 		if (key === "class") {
@@ -29,11 +24,10 @@ function add(parent, tag, options) {
 
 class Note {
 	constructor(title, created, content, labels, folder, uuid) {
-		this.title = title ?? "Untitled Note";
-		this.created = created ?? date();
+		this.title = title ?? "Untitled";
+		this.created = created ?? Date.now();
 		this.content = content ?? [
-			{ type: "text", content: "Empty note"},
-			{ type: "image", content: `https://picsum.photos/seed/${crypto.randomUUID()}/0/0` }
+			{ type: "text", content: "Empty"},
 		];
 		this.labels = labels ?? ["Work", "Personal", "Urgent", "Ideas", "To-Do", "School", "Kinda long label thats long"];
 		this.folder = folder ?? "Notes";
@@ -54,18 +48,20 @@ class Note {
 
 		const header = add(note, "div", { class: "header" });
 
-		add(header, "h2", { class: "title", textContent: this.title });
-		add(header, "p", { class: "created", textContent: this.created });
+		add(header, "textarea", { class: "title", value: this.title });
+		add(header, "p", { class: "created", textContent: formatDate(this.created) });
 
 		// content
 
 		const content = add(note, "div", { class: "content" });
 
 		for (const section of this.content) {
-			if (section.type === "text") {
-				add(content, "p", { class: "text", textContent: section.content });
-			} else if (section.type === "image") {
-				add(content, "img", { class: "image", src: section.content });
+			switch (section.type) {
+				case "text": {
+					add(content, "textarea", { class: "text", value: section.content });
+
+					break;
+				}
 			}
 		}
 
@@ -74,17 +70,14 @@ class Note {
 		const labels = add(note, "div", { class: "labels" });
 
 		for (const label of this.labels) {
-			console.log(label);
-			add(labels, "li", {
-				class: "label",
-				textContent: label });
+			add(labels, "li", { class: "label", textContent: label });
 		}
 
 		// info section
 
 		const info = add(note, "div", { class: "info", });
 
-		add(info, "p", { class: "uuid", textContent: this.uuid });
+		add(info, "p", { classList: "uuid copy", textContent: this.uuid });
 		add(info, "button", { class: "delete" });
 		add(info, "button", { class: "edit" });
 	}

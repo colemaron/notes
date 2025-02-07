@@ -53,31 +53,26 @@ for (const [uuid, note] of notes) {
 // note event listeners
 
 function copyText(element) {
-	const text = element.textContent;
-
-	if (text !== "Copied!") {
-		navigator.clipboard.writeText(text);
-		element.textContent = "Copied!";
-
-		setTimeout(() => element.textContent = text, 1000);
-	} 
+	navigator.clipboard.writeText(element.textContent);
 }
 
 document.addEventListener("click", event => {
 	const target = event.target;
 
-	switch (target.classList[0]) {
-		case "uuid": {
-			copyText(target);
-
-			break;
-		} case "delete": {
-			const note = target.closest(".note");
-			
-			notes.delete(note.dataset.uuid);
-			note.parentNode.remove();
-
-			break;
+	for (const name of target.classList) {
+		switch (name) {
+			case "copy": {
+				copyText(target);
+	
+				break;
+			} case "delete": {
+				const note = target.closest(".note");
+				
+				notes.delete(note.dataset.uuid);
+				note.parentNode.remove();
+	
+				break;
+			}
 		}
 	}
 })

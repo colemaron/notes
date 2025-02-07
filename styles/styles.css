@@ -32,6 +32,29 @@ svg {
 
 /* js styles */
 
+.copy {
+	position: relative;
+	cursor: pointer;
+
+	&::before {
+		content: "Copied!";
+
+		background-color: white;
+		position: absolute;
+		width: 100%;
+
+		opacity: 0;
+
+		transition-delay: 1s;
+	}
+
+	&:active::before {
+		opacity: 1;
+
+		transition: 0s;
+	}
+}
+
 .hidden {
 	display: none !important;
 }
