@@ -30,6 +30,7 @@ function saveNotes() {
 }
 
 window.addEventListener("beforeunload", saveNotes);
+setInterval(saveNotes, 10 * 1000);
 
 // add empty note
 

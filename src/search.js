@@ -31,9 +31,9 @@ searchForm.addEventListener("submit", event => {
 		if (text.includes(query)) {
 			n++;
 			
-			show(note);
+			show(note.parentElement);
 		} else {
-			hide(note);
+			hide(note.parentElement);
 		}
 	}
 
@@ -41,3 +41,16 @@ searchForm.addEventListener("submit", event => {
 
 	show(searchInfo);
 });
+
+// sort through notes
+
+// change note view layout
+
+const container = document.getElementById("notes");
+const layout = document.getElementById("note-layout");
+
+layout.addEventListener("click", event => {
+	const { display } = getComputedStyle(container);
+
+	display === "grid" ? container.style.display = "block" : container.style.display = "grid";
+})

@@ -11,6 +11,19 @@
 	box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
 }
 
+/* note layout */
+
+#note-layout {
+	height: 100%;
+	aspect-ratio: 1;
+
+	box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
+	background-color: white;
+
+	border-radius: 0.5rem;
+	border: none;
+}
+
 /* note searching */
 
 #search-form {

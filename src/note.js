@@ -12,6 +12,9 @@ function add(parent, tag, options) {
 	for (const [key, value] of Object.entries(options)) {
 		if (key === "class") {
 			element.classList.add(value);
+		} else if (key === "editable") {
+			element.setAttribute("contenteditable", value);
+			element.setAttribute("spellcheck", !value);
 		} else {
 			element[key] = value;
 		}
@@ -27,9 +30,10 @@ class Note {
 		this.title = title ?? "Untitled";
 		this.created = created ?? Date.now();
 		this.content = content ?? [
-			{ type: "text", content: "Empty"},
+			{ type: "text", content: "Empty text block"},
+			{ type: "code", content: "" },	
 		];
-		this.labels = labels ?? ["Work", "Personal", "Urgent", "Ideas", "To-Do", "School", "Kinda long label thats long"];
+		this.labels = labels ?? ["Work", "Personal"];
 		this.folder = folder ?? "Notes";
 		this.uuid = uuid ?? crypto.randomUUID();
 	}
@@ -38,7 +42,7 @@ class Note {
 
 	insert() {
 		const wrapper = add(noteContainer, "div", { class: "note-wrapper" });
-		const note = add(wrapper, "div", { class: "note", });
+		const note = add(wrapper, "div", { class: "note" });
 
 		note.dataset.created = this.created;
 		note.dataset.title = this.title;
@@ -48,8 +52,8 @@ class Note {
 
 		const header = add(note, "div", { class: "header" });
 
-		add(header, "textarea", { class: "title", value: this.title });
-		add(header, "p", { class: "created", textContent: formatDate(this.created) });
+		add(header, "h2", { class: "title", textContent: this.title, editable: true });
+		add(header, "p", { classList: "created copy", textContent: formatDate(this.created) });
 
 		// content
 
@@ -58,7 +62,11 @@ class Note {
 		for (const section of this.content) {
 			switch (section.type) {
 				case "text": {
-					add(content, "textarea", { class: "text", value: section.content });
+					add(content, "p", { class: "text", textContent: section.content, editable: true });
+
+					break;
+				} case "code": {
+					add(content, "code", { class: "code", textContent: section.content, editable: true });
 
 					break;
 				}
