@@ -38,7 +38,7 @@ const newNote = document.getElementById("new-note")
 
 function addNewNote() {
 	const note = new Note();
-	note.insert();
+	note.insert();	
 
 	notes.set(note.uuid, note);
 }

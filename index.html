@@ -8,9 +8,9 @@
 	<link rel="icon" href="https://www.google.com/images/branding/product/ico/googleg_lodp.ico">
 
 	<link rel="stylesheet" href="styles/styles.css">
-	<link rel="stylesheet" href="styles/notes.css">
-	<link rel="stylesheet" href="styles/folders.css">
 	<link rel="stylesheet" href="styles/header.css">
+	<link rel="stylesheet" href="styles/sidebar.css">
+	<link rel="stylesheet" href="styles/notes.css">
 
 	<script src="src/data.js" type="module" defer></script>
 	<script src="src/search.js" defer></script>
@@ -45,15 +45,23 @@
 
 		<!-- label filtering -->
 
-		<div id="folders">
-			<button class="folder selected">
-				<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M200-200h360v-200h200v-360H200v560Zm0 80q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v400L600-120H200Zm80-280v-80h200v80H280Zm0-160v-80h400v80H280Zm-80 360v-560 560Z"/></svg>
-				<p>Notes</p>
-			</button>
-			<button id="new-folder" class="folder">
-				<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
-				<p>New Folder</p>
-			</button>
+		<div id="sidebar">
+			<div id="folders">
+				<button class="folder selected">
+					<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M200-200h360v-200h200v-360H200v560Zm0 80q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v400L600-120H200Zm80-280v-80h200v80H280Zm0-160v-80h400v80H280Zm-80 360v-560 560Z"/></svg>
+					<p>Notes</p>
+				</button>
+				<button id="new-folder" class="folder">
+					<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
+					<p>New Folder</p>
+				</button>
+			</div>
+
+			<div id="sidebar-bottom">
+				<p>Profile Name</p>
+
+				<button id="sidebar-toggle"></button>
+			</div>
 		</div>
 
 		<!-- note content -->

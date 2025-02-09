@@ -2,7 +2,7 @@ const noteContainer = document.getElementById("notes");
 
 // get current formatted date
 
-const formatDate = date => new Date(date).toLocaleString(undefined, { dateStyle: "short", timeStyle: "short" });
+const formatDate = date => new Date(date).toLocaleString(undefined, { dateStyle: "medium", timeStyle: "medium" });
 
 // add element with name to parent
 
@@ -25,17 +25,35 @@ function add(parent, tag, options) {
 
 // note class
 
+const inputs = {
+	title: "Untitled",
+	created: () => Date.now(),
+	content: [
+		{ type: "text", content: "Empty note" },
+		{ type: "code", content: 
+`const inputs = {
+	title: "Untitled",
+	created: Date.now(),
+	content: [
+		{ type: "text", content: "Empty note" },
+		{ type: "code", content: "" },
+	],
+	labels: ["Default"],
+	folder: "Notes",
+	uuid: crypto.randomUUID,
+};` 
+},
+	],
+	labels: ["Default"],
+	folder: "Notes",
+	uuid: () => crypto.randomUUID(),
+};
+
 class Note {
-	constructor(title, created, content, labels, folder, uuid) {
-		this.title = title ?? "Untitled";
-		this.created = created ?? Date.now();
-		this.content = content ?? [
-			{ type: "text", content: "Empty text block"},
-			{ type: "code", content: "" },	
-		];
-		this.labels = labels ?? ["Work", "Personal"];
-		this.folder = folder ?? "Notes";
-		this.uuid = uuid ?? crypto.randomUUID();
+	constructor(...values) {
+		for (const [input, fallback] of Object.entries(inputs)) {
+			this[input] = values.shift() ?? (typeof fallback === "function" ? fallback() : fallback);
+		}
 	}
 
 	// insert dom note element
