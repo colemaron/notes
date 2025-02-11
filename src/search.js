@@ -13,7 +13,7 @@ const searchForm = document.getElementById("search-form");
 const searchInfo = document.getElementById("search-info");
 
 const getWrappers = () => Array.from(document.querySelectorAll(".note-wrapper"));
-// const getNotes = () => Array.from(document.querySelectorAll(".note"));
+const getNotes = () => Array.from(document.querySelectorAll(".note"));
 
 searchForm.addEventListener("submit", event => {
 	event.preventDefault();
@@ -22,14 +22,7 @@ searchForm.addEventListener("submit", event => {
 	const plainQuery = data.get("query");
 	const query = dumbText(plainQuery);
 
-	// if (query === "") return getNotes().forEach(show), hide(searchInfo);
-
-	if (query === "") {
-		getWrappers().forEach(show);
-		hide(searchInfo);
-
-		return;
-	}
+	if (query === "") return getWrappers().forEach(show), hide(searchInfo);
 
 	let n = 0;
 
@@ -52,17 +45,45 @@ searchForm.addEventListener("submit", event => {
 
 // sort through notes
 
+const noteContainer = document.getElementById("notes");
+const sortForm = document.getElementById("sort-form");
+const newNote = document.getElementById("new-note");
+
+const moveNote = note => noteContainer.appendChild(note.parentNode);
+
+const sortFunctions = {
+	"newest": (a, b) => b.dataset.created - a.dataset.created,
+	"oldest": (a, b) => a.dataset.created - b.dataset.created,
+	"a-z":    (a, b) => a.dataset.title.localeCompare(b.dataset.title),
+}
+
+function sortNotes() {
+	const data = new FormData(sortForm);
+	const sort = data.get("sort");
+
+	getNotes().sort(sortFunctions[sort]).forEach(moveNote);
+}
+
+sortForm.addEventListener("change", sortNotes);
+newNote.addEventListener("click", sortNotes);
+
+sortNotes();
+
 // change note view layout
 
 const container = document.getElementById("notes");
 const layout = document.getElementById("note-layout");
 
-layout.addEventListener("click", event => {
+function changeLayout() {
 	const { display } = getComputedStyle(container);
 
 	if (display === "grid") {
 		container.style.display = "block";
+		layout.style.transform = "rotate(90deg)";
 	} else {
 		container.style.display = "grid";
+		layout.style.transform = "rotate(0deg)";
 	}
-})
+}
+
+layout.addEventListener("click", changeLayout);

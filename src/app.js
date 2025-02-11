@@ -1,3 +1,5 @@
+// prevent styled pasting
+
 document.addEventListener("paste", event => {
 	event.preventDefault();
 	
@@ -5,6 +7,8 @@ document.addEventListener("paste", event => {
 
 	document.execCommand("insertText", false, text);
 });
+
+// allow tab typing in contents
 
 document.addEventListener("keydown", event => {
 	const active = document.activeElement;
@@ -15,5 +19,15 @@ document.addEventListener("keydown", event => {
 
 			document.execCommand('insertHTML', false, '&#009');
 		}
+	}
+})
+
+// enlarge image
+
+document.addEventListener("click", event => {
+	const target = event.target;
+
+	if (target.tagName === "IMG") {
+		target.classList.toggle("enlarged");
 	}
 })

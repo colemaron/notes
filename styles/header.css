@@ -14,14 +14,29 @@
 /* note layout */
 
 #note-layout {
+	cursor: pointer;
 	height: 100%;
 	aspect-ratio: 1;
 
 	box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
-	background-color: white;
-
+	
 	border-radius: 0.5rem;
 	border: none;
+
+	background-color: white;
+
+	&:hover {
+		box-shadow: 0 0 0 2px black;
+	}
+
+	&:active {
+		background-color: black;
+		svg { fill: white; }
+
+		transition: 50ms ease-out;
+	}
+
+	transition: 100ms;
 }
 
 /* note searching */

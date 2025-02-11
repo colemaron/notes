@@ -25,25 +25,18 @@ function add(parent, tag, options) {
 
 // note class
 
+function getRandomContent() {
+	return [
+		{ type: "text", content: "Empty note" },
+		{ type: "code", content: "console.log('Hello world!')" },
+		{ type: "img", content: `https://picsum.photos/seed/${Math.random()}/0/0` },
+	];
+}
+
 const inputs = {
 	title: "Untitled",
 	created: () => Date.now(),
-	content: [
-		{ type: "text", content: "Empty note" },
-		{ type: "code", content: 
-`const inputs = {
-	title: "Untitled",
-	created: Date.now(),
-	content: [
-		{ type: "text", content: "Empty note" },
-		{ type: "code", content: "" },
-	],
-	labels: ["Default"],
-	folder: "Notes",
-	uuid: crypto.randomUUID,
-};` 
-},
-	],
+	content: getRandomContent,
 	labels: ["Default"],
 	folder: "Notes",
 	uuid: () => crypto.randomUUID(),
@@ -85,6 +78,10 @@ class Note {
 					break;
 				} case "code": {
 					add(content, "code", { class: "code", textContent: section.content, editable: true });
+
+					break;
+				} case "img": {
+					add(content, "img", { class: "img", src: section.content });
 
 					break;
 				}
