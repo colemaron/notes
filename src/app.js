@@ -24,10 +24,11 @@ document.addEventListener("keydown", event => {
 
 // enlarge image
 
-document.addEventListener("click", event => {
-	const target = event.target;
+const fullscreen = document.getElementById("fullscreen");
 
+document.addEventListener("click", ({ target }) => {
 	if (target.tagName === "IMG") {
-		target.classList.toggle("enlarged");
+		fullscreen.src = target.src;
+		fullscreen.classList.toggle("hidden");
 	}
-})
+});
