@@ -89,14 +89,19 @@
 	}
 
 	img {
-		max-width: 30vmax;
-		max-height: 30vmax;
+		width: min-content;
 
-		width: 100%;
+		max-width: min(50%, 50vmax);
+		max-height: 25vmax;
+
+		border-radius: 0.5rem;
 
 		object-fit: contain;
 		object-position: left;
 	}
+}
+#notes:not([style*="block"]) .note img {
+	max-width: 100%;
 }
 
 .note [contenteditable="true"] {

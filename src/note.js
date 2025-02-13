@@ -6,7 +6,7 @@ const formatDate = date => new Date(date).toLocaleString(undefined, { dateStyle:
 
 // add element with name to parent
 
-function add(parent, tag, options) {
+Element.prototype.add = function(tag, options) {
 	const element = document.createElement(tag);
 
 	for (const [key, value] of Object.entries(options)) {
@@ -20,23 +20,21 @@ function add(parent, tag, options) {
 		}
 	}
 
-	return parent.appendChild(element);
-}
+	return this.appendChild(element);
+};
 
 // note class
-
-function getRandomContent() {
-	return [
-		{ type: "text", content: "Empty note" },
-		{ type: "code", content: "console.log('Hello world!')" },
-		{ type: "img", content: `https://picsum.photos/seed/${Math.random()}/0/0` },
-	];
-}
 
 const inputs = {
 	title: "Untitled",
 	created: () => Date.now(),
-	content: getRandomContent,
+	content: () => {
+		return [
+			{ type: "text", content: "Empty note" },
+			{ type: "code", content: `console.log("Hello world!")` },
+			{ type: "img", content: `https://picsum.photos/seed/${Math.random()}/1000/3000` },
+		];
+	},
 	labels: ["Default"],
 	folder: "Notes",
 	uuid: () => crypto.randomUUID(),
@@ -52,8 +50,8 @@ class Note {
 	// insert dom note element
 
 	insert() {
-		const wrapper = add(noteContainer, "div", { class: "note-wrapper" });
-		const note = add(wrapper, "div", { class: "note" });
+		const wrapper = noteContainer.add("div", { class: "note-wrapper" });
+		const note = wrapper.add("div", { class: "note" });
 
 		note.dataset.created = this.created;
 		note.dataset.title = this.title;
@@ -61,27 +59,27 @@ class Note {
 
 		// header
 
-		const header = add(note, "div", { class: "header" });
+		const header = note.add("div", { class: "header" });
 
-		add(header, "h2", { class: "title", textContent: this.title, editable: true });
-		add(header, "p", { classList: "created copy", textContent: formatDate(this.created) });
+		header.add("h2", { class: "title", textContent: this.title, editable: true });
+		header.add("p", { classList: "created copy", textContent: formatDate(this.created) });
 
 		// content
 
-		const content = add(note, "div", { class: "content" });
+		const content = note.add("div", { class: "content" });
 
 		for (const section of this.content) {
 			switch (section.type) {
 				case "text": {
-					add(content, "p", { class: "text", textContent: section.content, editable: true });
+					content.add("p", { class: "text", textContent: section.content, editable: true });
 
 					break;
 				} case "code": {
-					add(content, "code", { class: "code", textContent: section.content, editable: true });
+					content.add("code", { class: "code", textContent: section.content, editable: true });
 
 					break;
 				} case "img": {
-					add(content, "img", { class: "img", src: section.content });
+					content.add("img", { class: "img", src: section.content });
 
 					break;
 				}
@@ -90,19 +88,19 @@ class Note {
 
 		// labels
 
-		const labels = add(note, "div", { class: "labels" });
+		const labels = note.add("div", { class: "labels" });
 
 		for (const label of this.labels) {
-			add(labels, "li", { class: "label", textContent: label });
+			labels.add("li", { class: "label", textContent: label });
 		}
 
 		// info section
 
-		const info = add(note, "div", { class: "info", });
+		const info = note.add("div", { class: "info" });
 
-		add(info, "p", { classList: "uuid copy", textContent: this.uuid });
-		add(info, "button", { class: "delete" });
-		add(info, "button", { class: "edit" });
+		info.add("p", { classList: "uuid copy", textContent: this.uuid });
+		info.add("button", { class: "delete" });
+		info.add("button", { class: "edit" });
 	}
 }
 

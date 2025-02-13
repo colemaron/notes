@@ -15,7 +15,7 @@ const searchInfo = document.getElementById("search-info");
 const getWrappers = () => Array.from(document.querySelectorAll(".note-wrapper"));
 const getNotes = () => Array.from(document.querySelectorAll(".note"));
 
-searchForm.addEventListener("submit", event => {
+function searchNotes(event) {
 	event.preventDefault();
 
 	const data = new FormData(searchForm);
@@ -41,7 +41,9 @@ searchForm.addEventListener("submit", event => {
 	searchInfo.innerHTML = `${n ? n : "No"} result${n === 1 ? "" : "s"} found for <span id="search-query">${plainQuery}</span>`;
 
 	show(searchInfo);
-});
+}
+
+searchForm.addEventListener("submit", searchNotes);
 
 // sort through notes
 
