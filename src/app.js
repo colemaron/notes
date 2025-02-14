@@ -22,13 +22,21 @@ document.addEventListener("keydown", event => {
 	}
 })
 
+// add spinner to loading elements
+
+
+
 // enlarge image
 
 const fullscreen = document.getElementById("fullscreen");
+const fullscreenImage = document.getElementById("fullscreen-image");
+const fullscreenSize = document.getElementById("fullscreen-size");
 
 document.addEventListener("click", ({ target }) => {
 	if (target.tagName === "IMG") {
-		fullscreen.src = target.src;
+		fullscreenImage.src = target.src;
 		fullscreen.classList.toggle("hidden");
+
+		fullscreenSize.textContent = `${target.naturalWidth} x ${target.naturalHeight}`;
 	}
 });

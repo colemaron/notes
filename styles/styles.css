@@ -59,9 +59,11 @@ svg {
 	display: none !important;
 }
 
+/* fullscreen */
+
 #fullscreen {
 	position: fixed;
-	z-index: 99;
+	z-index: 1;
 	top: 0;
 	left: 0;
 
@@ -72,10 +74,30 @@ svg {
 	object-fit: contain;
 	cursor: pointer;
 
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+
 	&:not(&.hidden) {
 		background-color: rgba(0, 0, 0, 0.5);
 		backdrop-filter: blur(8px);
 	}
+}
 
-	transition: 100ms ease-out;
+#fullscreen-image {
+	width: 100%;
+	height: 100%;
+
+	object-fit: contain;
+}
+
+#fullscreen-size {
+	position: fixed;
+	bottom: 0;
+	
+	line-height: 2rem;
+	height: 2rem;
+
+	color: white;
 }

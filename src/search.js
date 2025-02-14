@@ -44,6 +44,8 @@ function searchNotes(event) {
 }
 
 searchForm.addEventListener("submit", searchNotes);
+document.addEventListener("note-added", searchNotes);
+document.addEventListener("note-deleted", searchNotes);
 
 // sort through notes
 

@@ -1,3 +1,5 @@
+import { Utils } from "./utils.js";
+
 const noteContainer = document.getElementById("notes");
 
 // get current formatted date
@@ -8,6 +10,11 @@ const formatDate = date => new Date(date).toLocaleString(undefined, { dateStyle:
 
 Element.prototype.add = function(tag, options) {
 	const element = document.createElement(tag);
+
+	if (tag === "img") {
+		element.setAttribute("decoding", "async");
+		element.setAttribute("loading", "lazy");
+	}
 
 	for (const [key, value] of Object.entries(options)) {
 		if (key === "class") {
@@ -32,12 +39,12 @@ const inputs = {
 		return [
 			{ type: "text", content: "Empty note" },
 			{ type: "code", content: `console.log("Hello world!")` },
-			{ type: "img", content: `https://picsum.photos/seed/${Math.random()}/1000/3000` },
+			{ type: "img", content: Utils.random.img() },
 		];
 	},
 	labels: ["Default"],
 	folder: "Notes",
-	uuid: () => crypto.randomUUID(),
+	uuid: () => Utils.random.uuid(),
 };
 
 class Note {
