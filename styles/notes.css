@@ -41,7 +41,7 @@
 	grid-area: notes;
 
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+	grid-template-columns: repeat(auto-fill, minmax(25vw, 1fr));
 	grid-template-rows: min-content;
 
 	overflow-y: auto;
@@ -76,7 +76,29 @@
 		margin-top: 2rem;
 	}
 
-	code {
+	textarea {
+		min-width: 1rem;
+		min-height: 1rem;
+
+		field-sizing: content;
+		resize: none;
+		border: none;
+	
+		outline-offset: 8px;
+		outline: 2px solid transparent;
+	
+		&:focus {
+			outline: 2px solid black;
+		}
+	
+		&:hover:not(&:focus) {
+			outline: 2px dashed rgba(0, 0, 0, 0.25);
+		}
+	
+		transition: 150ms ease-out;
+	}
+
+	.code {
 		font-family: monospace;
 		tab-size: 4ch;
 
@@ -105,36 +127,20 @@
 	max-width: 100%;
 }
 
-.note [contenteditable="true"] {
-	outline: none;
-	min-width: 1rem;
-	min-height: 1rem;
-
-	outline-offset: 8px;
-	outline: 2px solid transparent;
-
-	&:focus {
-		outline: 2px solid black;
-	}
-
-	&:hover:not(&:focus) {
-		outline: 2px dashed rgba(0, 0, 0, 0.25);
-	}
-
-	transition: 150ms ease-out;
-}
-
 /* note header */
 
 .note .header {
 	display: flex;
 	align-items: baseline;
 	justify-content: space-between;
+	flex-wrap: wrap;
 	gap: 1rem;
 
 	.title {
 		font-size: 24px;
 		font-weight: 700;
+
+		flex-grow: 1;
 	}
 
 	.created {
@@ -235,4 +241,29 @@
 
 #search-info {
 	grid-column: 1 / -1;
+
+	cursor: pointer;
+	text-align: left;
+	background: none;
+	border: none;
+
+	font-size: 1rem;
+
+	&:hover::after {
+		content: "×";
+
+		position: absolute;
+		text-align: center;
+
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+
+		width: 1.5rem;
+		height: 1.5rem;
+		margin-left: 4px;
+
+		font-size: 2rem;
+		font-weight: 200;
+	}
 }

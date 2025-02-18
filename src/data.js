@@ -1,5 +1,5 @@
-import { Utils } from "./utils.js";
-import { Note } from "./note.js";
+import { Utils } from "../inc/utils.js";
+import { Note } from "../inc/note.js";
 
 // map conversion
 
@@ -18,26 +18,26 @@ function jsonObjectToNotes(json) {
 
 // load notes
 
-const json = JSON.parse(localStorage.getItem("notes")) || {};
+const json = JSON.parse(localStorage.getItem('notes')) || {};
 const notes = jsonObjectToNotes(json);
 
 // save notes
 
 function saveNotes() {
-	console.log("Saving notes...");
+	console.log('Saving notes...');
 
 	const object = objectFromMap(notes);
 	const json = JSON.stringify(object);
 
-	localStorage.setItem("notes", json);
+	localStorage.setItem('notes', json);
 }
 
-window.addEventListener("beforeunload", saveNotes);
+window.addEventListener('beforeunload', saveNotes);
 setInterval(saveNotes, 60 * 1000); // 60 second auto save
 
 // add empty note
 
-const newNote = document.getElementById("new-note");
+const newNote = document.getElementById('new-note');
 
 function addNewNote() {
 	const note = new Note();
@@ -45,10 +45,10 @@ function addNewNote() {
 
 	notes.set(note.uuid, note);
 
-	Utils.dispatch("note-added");
+	Utils.dispatch('note-added');
 }
 
-newNote.addEventListener("click", addNewNote);
+newNote.addEventListener('click', addNewNote);
 
 // load note elements
 
@@ -62,22 +62,22 @@ function copyText(element) {
 	navigator.clipboard.writeText(element.textContent);
 }
 
-document.addEventListener("click", event => {
+document.addEventListener('click', event => {
 	const target = event.target;
 
 	for (const name of target.classList) {
 		switch (name) {
-			case "copy": {
+			case 'copy': {
 				copyText(target);
 	
 				break;
-			} case "delete": {
-				const note = target.closest(".note");
+			} case 'delete': {
+				const note = target.closest('.note');
 				
 				notes.delete(note.dataset.uuid);
 				note.parentNode.remove();
 
-				Utils.dispatch("note-deleted");
+				Utils.dispatch('note-deleted');
 	
 				break;
 			}

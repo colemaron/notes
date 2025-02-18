@@ -14,6 +14,11 @@ body {
 	overflow: hidden;
 }
 
+::selection {
+	background-color: black;
+	color: white;
+}
+
 svg {
 	vertical-align: middle;
 }
@@ -25,7 +30,7 @@ svg {
 	grid-template-areas:
 		"header header"
 		"folders notes";
-	grid-template-columns: 250px 1fr;
+	grid-template-columns: max(15vw, 200px) 1fr;
 	grid-template-rows: 5rem 1fr;
 	height: 100vh;
 }
@@ -90,14 +95,4 @@ svg {
 	height: 100%;
 
 	object-fit: contain;
-}
-
-#fullscreen-size {
-	position: fixed;
-	bottom: 0;
-	
-	line-height: 2rem;
-	height: 2rem;
-
-	color: white;
 }
