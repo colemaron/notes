@@ -18,7 +18,7 @@ class Utils {
 
 	// events
 
-	static dispatch = name => document.dispatchEvent(new CustomEvent(name));
+	static dispatch = (name, detail) => document.dispatchEvent(new CustomEvent(name, { detail }));
 }
 
 export { Utils };

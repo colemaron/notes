@@ -23,15 +23,15 @@
 	border-radius: 0.5rem;
 	border: none;
 
-	background-color: white;
+	background-color: var(--color-primary);
 
 	&:hover {
-		box-shadow: 0 0 0 2px black;
+		box-shadow: 0 0 0 2px var(--color-accent);
 	}
 
 	&:active {
-		background-color: black;
-		svg { fill: white; }
+		background-color: var(--color-accent);
+		svg { fill: var(--color-primary); }
 
 		transition: 50ms ease-out;
 	}
@@ -71,7 +71,7 @@
 	box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
 
 	&:focus {
-		box-shadow: 0 0 0 2px black;
+		box-shadow: 0 0 0 2px var(--color-accent);
 	}
 
 	transition: 100ms ease-out;
@@ -110,7 +110,7 @@
 	}
 
 	&:focus {
-		box-shadow: 0 0 0 2px black;
+		box-shadow: 0 0 0 2px var(--color-accent);
 	}
 
 	transition: 100ms ease-out;

@@ -4,11 +4,13 @@
 	display: flex;
 	justify-content: space-between;
 	flex-direction: column;
+
+	box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
 }
 
 #sidebar-bottom {
 	padding: 1rem;
-	border-top: 2px solid black;
+	border-top: 2px solid var(--color-accent);
 
 	display: flex;
 	align-items: center;
@@ -25,16 +27,23 @@
 	height: 2rem;
 	border: none;
 
+	background-color: var(--color-accent);
 	background-image: url("../icons/sidebar.png");
 	background-position: center;
 	background-size: 75%;
 	background-repeat: no-repeat;
 
-	filter: invert(1);
-
 	&:hover {
-		box-shadow: 0 0 0 2px white;
+		box-shadow: 0 0 0 2px var(--color-accent);
 	}
+
+	&:active {
+		scale: 0.95;
+
+		transition: 50ms;
+	}
+
+	transition: 100ms ease-out;
 }
 
 /* folders */
@@ -59,7 +68,7 @@
 	border: none;
 
 	&:hover {
-		box-shadow: 0 0 0 2px black;
+		box-shadow: 0 0 0 2px var(--color-accent);
 	}
 
 	&:active:not(.folder.selected) {
@@ -72,11 +81,15 @@
 }
 
 .folder.selected {
-	background-color: black;
-	color: white;
+	background-color: var(--color-accent);
+	color: var(--color-primary);
+
+	> p {
+		color: var(--color-primary);
+	}
 
 	svg {
-		fill: white;
+		fill: var(--color-primary);
 	}
 }
 

@@ -11,22 +11,22 @@
 	width: 5rem;
 	height: 5rem;
 
-	box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
+	box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
 	border-radius: 50%;
 	border: none;
 
-	background-color: black;
-	svg { fill: white; }
+	background-color: var(--color-accent);
+	svg { fill: var(--color-primary); }
 
 	&:hover {
-		background-color: white;
-		svg { fill: black; }
+		background-color: var(--color-primary);
+		svg { fill: var(--color-accent); }
 
 		border-radius: 1rem;
 	}
 
 	&:active {
-		box-shadow: 0 0 0 2px black;
+		box-shadow: 0 0 0 2px var(--color-accent);
 		scale: 0.95;
 
 		transition: 50ms ease-out;
@@ -55,14 +55,9 @@
 	padding: 1rem;
 
 	&:hover {
-		.note {
-			box-shadow: 0 0 0 2px black;
-		}
-
-		.note .info {
-			margin-top: 2rem;
-			height: 3rem;
-			opacity: 1;
+		.note > .info {
+			display: flex;
+			height: fit-content;
 		}
 	}
 }
@@ -71,6 +66,14 @@
 	box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
 	border-radius: 1rem;
 	padding: 2rem;
+
+	&:hover {
+		box-shadow: 0 0 0 2px var(--color-accent);
+
+		textarea {
+			outline-color: #f2f2f2;
+		}
+	}
 
 	> *:not(:first-child) {
 		margin-top: 2rem;
@@ -84,18 +87,22 @@
 		resize: none;
 		border: none;
 	
-		outline-offset: 8px;
-		outline: 2px solid transparent;
+		outline-color: transparent;
+		outline-style: solid;
+		outline-offset: calc(0.5rem - 0.5px);
+		outline-width: 2px;
 	
 		&:focus {
-			outline: 2px solid black;
+			outline-color: var(--color-accent);
+			outline-style: solid;
 		}
 	
 		&:hover:not(&:focus) {
-			outline: 2px dashed rgba(0, 0, 0, 0.25);
+			outline-color: #aaa;
+			outline-style: dashed;
 		}
 	
-		transition: 150ms ease-out;
+		transition: 100ms ease-out;
 	}
 
 	.code {
@@ -105,8 +112,8 @@
 		white-space: pre-wrap;
 		overflow-wrap: break-word;
 
-		background-color: rgba(0, 0, 0, 0.05);
-		border-left: 4px solid black;
+		background-color: #f9f9f9;
+		border-left: 4px solid var(--color-accent);
 		padding: 0.5rem 1rem;
 	}
 
@@ -121,32 +128,27 @@
 		object-fit: contain;
 		object-position: left;
 	}
+
+	transition: 100ms ease-out;
 }
 
-#notes:not([style*="block"]) .note img {
-	max-width: 100%;
+#notes:not([style*="block"]) .note {
+	img {
+		max-width: 100%;
+	}
 }
 
 /* note header */
 
 .note .header {
 	display: flex;
-	align-items: baseline;
-	justify-content: space-between;
-	flex-wrap: wrap;
+	flex-direction: column;
 	gap: 1rem;
 
-	.title {
-		font-size: 24px;
-		font-weight: 700;
-
-		flex-grow: 1;
-	}
-
-	.created {
-		white-space: nowrap;
-		text-overflow: ellipsis;
-		overflow: hidden;
+	> .title {
+		font-size: 1.5rem;
+		font-weight: 500;
+		width: 100%;
 	}
 }
 
@@ -155,7 +157,7 @@
 .note .content {
 	display: flex;
 	flex-direction: column;
-	gap: 1.5rem;
+	gap: 1rem;
 }
 
 /* note labels */
@@ -168,8 +170,8 @@
 }
 
 .note .labels li {
-	background-color: black;
-	color: white;
+	background-color: var(--color-accent);
+	color: var(--color-primary);
 	border-radius: 100vw;
 	padding: 5px 12px;
 
@@ -183,14 +185,6 @@
 	align-items: center;
 	gap: 0.5rem;
 
-	overflow: hidden;
-	opacity: 0;
-	height: 0;
-
-	margin: 0;
-
-	transition: 200ms cubic-bezier(0.2, 0.1, 0, 1);
-
 	> button {
 		cursor: pointer;
 
@@ -199,16 +193,13 @@
 		width: 40px;
 		height: 40px;
 
-		background-color: black;
+		background-color: var(--color-accent);
 		background-repeat: no-repeat;
 		background-position: center;
 		background-size: 24px;
 
-		flex-shrink: 0;
-		filter : invert(1);
-
 		&:hover {
-			filter: none;
+			box-shadow: 0 0 0 2px var(--color-accent);
 		}
 
 		&:active {
@@ -221,20 +212,10 @@
 		transition: 100ms, rotate 250ms cubic-bezier(0, 0, 0, 1.5);
 	}
 
-	.uuid {
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
+	transition: 100ms ease-out;
 
-		flex-shrink: 1;
-	}
-
-	> .edit { background-image: url("../icons/edit.png"); }
 	> .delete { background-image: url("../icons/delete.png"); }
-}
-
-.info :first-child {
-	flex-grow: 1;
+	> .edit { background-image: url("../icons/edit.png"); }
 }
 
 /* search info */
